@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_115844) do
+ActiveRecord::Schema.define(version: 2020_11_21_091004) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_115844) do
     t.datetime "updated_at", null: false
     t.text "introduction"
     t.string "profile_image_id"
+    t.boolean "is_deleted"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

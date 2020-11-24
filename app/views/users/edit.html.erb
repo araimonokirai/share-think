@@ -12,7 +12,7 @@
                       <h2 class="form-header-title">プロフィール編集</h2>
                     </div>
                     <div class="form-body">
-                      <!-- ここにform_withを追加します -->
+
                       <%= form_with model:@user, local:true do |f| %>
                         <div class="form-group has-icon">
                           <label class="control-label sr-only" for="inputEmail">Name</label>
@@ -21,16 +21,19 @@
                         </div>
                         <div class="form-group has-icon">
                           <label class="control-label sr-only" for="inputEmail">Introduction</label>
-                           <%= f.text_field :introduction %>
+                           <%= f.text_field :introduction, class:"form-control" %>
                         </div>
                         <div class="form-group has-icon">
                           <div class="user-edit-image">
-                          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
+                          <%= attachment_image_tag @user, :profile_image, size: "30x30", class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
                           </div>
                           <label class="control-label sr-only" for="inputEmail">ProfileImage</label>
                           <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
                         </div>
                         <%= f.submit "変更を保存", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
+                      <% end %>
+                      <% if user_signed_in? && @user.id == current_user.id %>
+                        <%= link_to "退会", users_hide_user_path(current_user), method: :put, "data-confirm" => "本当に退会しますか？", class: "btn btn-outline-danger" %>
                       <% end %>
                     </div>
                   </div>

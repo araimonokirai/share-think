@@ -1,108 +1,40 @@
-<section class="sct-color-1 slice">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 posts_container">
-        <div class="post-item">
-
-          <div class="post-meta-top">
-            <div class="post-image">
-        <%= attachment_image_tag @post, :image, size: '100x100' %>
-      </div>
-    </div>
-    <div class="post-content">
-      <h2 class="post-title"><%= @post.title %></h2>
-      <ul class="meta-info-cells v4 float-wrapper">
-        <li>
-          <i class="fa fa-user"></i>By<a href="#">
-            <%= @post.user.name %></a>
-        </li>
-        <li>
-          <i class="fa fa-calendar"></i><%= @post.created_at.strftime('%Y/%m/%d') %>
-        </li>
-        <% if @post.favorited_by?(current_user) %>
-        <li>
-          <%= link_to post_favorites_path(@post), method: :delete do %>
-            <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-            <%= @post.favorites.count %> いいね
-        <% end %>
-        </li>
-        <% else %>
-        <li>
-        <%= link_to post_favorites_path(@post), method: :post do %>
-          <i class="fa fa-heart-o" aria-hidden="true"></i>
-          <%= @post.favorites.count %> いいね
-          <% end %>
-        </li>
-        <% end %>
-
-        <li>
-          <i class="fa fa-comment"></i>
-          <a href="#comments"><%= @post.post_comments.count %></a>
-        </li>
-        <li>
-          <% if @post.user == current_user %>
-            <%= link_to "削除", post_path(@post), method: :delete %>
-          <% end %>
-        </li>
-      </ul>
-      <div class="post-content-inner mt-20">
-        <p><%= @post.remark %></p>
-      </div>
-          </div>
-
-
-
-          <div class="comment-list bt style-2" id="comments">
-            <div class="float-wrapper">
-              <h2 class="comment-count"><%= @post.post_comments.count %>件コメント</h2>
-            </div>
-            <ol>
-               <% @post.post_comments.each do |post_comment| %>
-    <li class="comment">
-      <div class="comment-body bb">
-        <div class="comment-avatar">
-          <div class="avatar">
-            <%= attachment_image_tag post_comment.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-          </div>
-        </div>
-        <div class="comment-text">
-          <div class="comment-author clearfix">
-            <a href="#" class="link-author"><%= post_comment.user.name %></a>
-            <span class="comment-meta">
-              <span class="comment-date"><%= post_comment.created_at.strftime('%Y/%m/%d') %></span>
-            </span>
-          </div>
-          <div class="comment-entry"><%= post_comment.comment %></div>
-          <% if post_comment.user == current_user %>
-           <div>
-             <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
-           </div>
-          <% end %>
-        </div>
-      </div>
-    </li>
-  <% end %>
-            </ol>
-          </div>
-          <hr>
-
-          <!-- Add comment section -->
-          <div class="section-title-wrapper style-1 v1 mt-30" id="divAddComment">
-            <h3 class="section-title left">
-              <span>コメント</span>
-            </h3>
-          </div>
-          <%= form_with(model:[@post, @post_comment], local: true) do |f| %>
-            <div class="row">
-              <div class="col-sm-12">
-                <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-              </div>
-            </div>
-            <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-          <% end %>
-
-        </div>
-      </div>
-    </div>
+<div class='row'>
+  <div class='col-xs-3'>
+    <h2>User info</h2>
+    <%= render 'users/info', user: @post.user %>
+    <h2>New book</h2>
+    <%= render 'form', post: Post.new %>
   </div>
-</section>
+
+
+  <div class='col-xs-9'>
+		<h2>Post detail</h2>
+		<table class='table'>
+		  <tr id="post_<%= @post.id %>">
+        <td>
+          <%= link_to user_path(@post.user) do %>
+            <%= attachment_image_tag(@post.user, :profile_image, size:"100x100", fallback: "no-image-icon.jpg") %><br>
+            <%= @post.user.name %>
+          <% end %>
+        </td>
+        <td><%= link_to @post.title, post_path(@post) %></td>
+        <td><%= @post.remark %></td>
+        <td class="favorite-btn"><%= render "favorites/favorite-btn", post: @post %></td>
+        <td class="comments-count">コメント数: <%= @post.post_comments.count %></td>
+
+        <% if @post.user == current_user %>
+          <td><%= link_to 'Edit', edit_post_path(@post), class: "btn-sm btn-success edit_post_#{@post.id}" %></td>
+          <td><%= link_to 'Destroy', post_path(@post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_post_#{@post.id}"%></td>
+        <% end %>
+      </tr>
+    </table>
+    <table class="post_comments">
+      <%= render 'post_comments/index', post: @post %>
+    </table>
+    <%= form_with model:[@post,@post_comment], remote: true do |f| %>
+      <%= f.text_area :comment, size:"90x5" %>
+      <%= f.submit '送信'%>
+    <% end %>
+
+  </div>
+</div>
