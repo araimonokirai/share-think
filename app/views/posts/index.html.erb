@@ -15,10 +15,10 @@
                   </div>
                 </div>
                 <div class="block-content">
-                  <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+                  <%= attachment_image_tag post.user, :profile_image, size: "60x60", fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
                   <h3 class="block-title">
                     <%= link_to post_path(post.id) do %>
-                      <i class="fa fa-map-marker"></i><%= post.title %>
+                      <%= post.title %>
                     <% end %>
                   </h3>
                   <p><%= post.remark %></p>

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :admin_user, only: :destroy
   
   def show
     @user = User.find(params[:id])
@@ -31,8 +32,13 @@ class UsersController < ApplicationController
     redirect_to user_path(@user.id)
   end
   
-
-
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to users_path
+  end
+  
+  
   private
   
   def user_params
@@ -44,5 +50,9 @@ class UsersController < ApplicationController
     unless @user == current_user
       redirect_to user_path(current_user)
     end
+  end
+  
+  def admin_user
+      redirect_to(root_url) unless current_user.admin?
   end
 end

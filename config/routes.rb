@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
   end
 
-  resources :users, only: [:show, :edit, :update, :index] do
+  resources :users, only: [:show, :edit, :update, :index, :destroy] do
      member do
       put "/users/:id/hide" => "users#hide", as: 'users_hide'
     end
