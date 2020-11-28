@@ -1,12 +1,10 @@
 <section class="sct-color-1 slice">
   <div class="container-fluid masonry-container">
     <div class="row">
-      <div class="col-md-8 col-sm-offset-2">
-        <div class="masonry-wrapper-cols">
-          <div class="masonry-gutter"></div>
+      <div class="col-md-8">
+        <div class="post_wrap">
           <% @posts.each do |post| %>
-            <div class="masonry-block">
-              <div class="block block-image v1">
+              <div class="post_block">
                 <div class="block-image">
                   <div class="view view-first">
                     <%= link_to post_path(post.id) do %>
@@ -15,13 +13,13 @@
                   </div>
                 </div>
                 <div class="block-content">
-                  <%= attachment_image_tag post.user, :profile_image, size: "60x60", fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
                   <h3 class="block-title">
                     <%= link_to post_path(post.id) do %>
                       <%= post.title %>
                     <% end %>
                   </h3>
                   <p><%= post.remark %></p>
+                  <%= attachment_image_tag post.user, :profile_image, size: "20x20", fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
                   <ul class="inline-meta">
                     <li>By
                       <%= post.user.name %>
@@ -32,10 +30,9 @@
                   </ul>
                 </div>
               </div>
-            </div>
           <% end %>
-          <%= paginate @posts %>
         </div>
+        <%= paginate @posts %>
       </div>
     </div>
   </div>

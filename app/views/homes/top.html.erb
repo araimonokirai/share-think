@@ -1,3 +1,8 @@
 <div class="row">
   <h2 class="top-welcome">ようこそShare-Thinkへ</h2>
+  <div class="text-center"><%= image_tag "shop.jpg", size:"500x400" %></div>
+  <div class="top_block">
+  <p><%= link_to ' sign up', new_user_registration_path, class: 'glyphicon glyphicon-edit sign_up btn' %></p>
+  <p><%= link_to ' login', new_user_session_path, class: 'glyphicon glyphicon-log-in sign_in btn'%></p>
+  </div>
 </div>

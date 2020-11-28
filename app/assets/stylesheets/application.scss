@@ -16,21 +16,29 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import "font-awesome";
-
+ @import "slick-theme"; 
+ @import "slick";
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    list-style: none;
+}
+
+th {
+ word-break : break-all;
 }
 
 .row {
  margin-top: 20px;
  margin-bottom: 20px;
- height: 800px;
  background-color: #f2f7f5;
 }
 
+.table {
+ margin-top: 10px;
+}
 
 .row_about {
  margin-top: 20px;
@@ -40,17 +48,17 @@
 }
 
 header {
- padding: 30px 25px 10px;
+ padding: 15px 25px 10px;
  border-bottom: 1px solid;
  top: 0;
  width: 100%;
- height: 200px;
+ height: 80px;
  background-color: #495464;
 }
 
 .image_logo {
- width: 150px;
- height: 120px;
+ width: 100px;
+ height: 60px;
  margin-right: auto;
  }
 
@@ -69,12 +77,35 @@ header {
   height: 150px;
   width: 100%;
   background-color: #bbbfca;
+  position: relative;
  }
- 
+
+ .footer-text {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+ }
+
  .circle {
    border-radius: 50%;
    padding: 5px 10px;
    margin-bottom: 5px;
-   border: solid px;
+   border: solid 2px;
    color: black;
  }
+
+ .post {
+  &_wrap {
+   display: flex;
+   justify-content: space-around;
+   margin-top: 20px;
+  }
+  &_block {
+   border: solid 1px #CCCCCC;
+   background: #fff;
+  }
+ }
+
+.top-welcome {
+ font-family: cursive;
+}

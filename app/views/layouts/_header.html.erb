@@ -1,10 +1,10 @@
 <header>
   <div class="container">
-   <h3 class="nav nav-pills navbar-left logo">
+   <div class="nav nav-pills navbar-left">
     <%= link_to image_tag('logo.jpg', class:'image_logo'), '/' %>
-   </h3>
+   </div>
     <nav>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav nav-pills pull-right">
         <% if user_signed_in? %>
           <li class="nav-item"><%= link_to ' Home', user_path(current_user), class: 'glyphicon glyphicon-home home' %></li>
           <li class="nav-item"><%= link_to ' Users', users_path, class: 'glyphicon glyphicon-user users' %></li>

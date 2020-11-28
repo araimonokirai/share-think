@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   has_many :posts, dependent: :destroy
   attachment :profile_image
   has_many :post_comments, dependent: :destroy
@@ -17,7 +17,7 @@ class User < ApplicationRecord
   # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings, through: :relationships, source: :followed
 
-  
+
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
@@ -29,7 +29,7 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
-  
-  
+
+
+
 end
