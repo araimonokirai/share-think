@@ -9,11 +9,14 @@
   </div>
 
 
-  
+
 
   <div class='col-xs-12'>
-    <%= link_to "+", "/posts/new", data: {"turbolinks" => false}, class: "pull-right circle" %>
-    <h2>post</h2>
+    <%= link_to "", "/posts/new", data: {"turbolinks" => false}, class: "pull-right fa fa-plus-circle fa-4x" %>
+    <h2>
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      Think
+    </h2>
 
     <%= render 'posts/index', posts: @posts %>
   </div>

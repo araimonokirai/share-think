@@ -30,7 +30,7 @@
       <%= render 'post_comments/index', post: @post %>
     </table>
     <%= form_with model:[@post,@post_comment],data:{remote:true} do |f| %>
-      <%= f.text_area :comment, size:"90x5" %>
+      <%= f.text_area :comment, size:"70x5" %>
       <%= f.submit '送信'%>
     <% end %>
   </div>
