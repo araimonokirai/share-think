@@ -16,7 +16,7 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import "font-awesome";
- @import "slick-theme"; 
+ @import "slick-theme";
  @import "slick";
 
 * {
@@ -47,6 +47,9 @@ th {
  background-color: #f2f7f5;
 }
 
+
+/*header*/
+
 header {
  padding: 15px 25px 10px;
  border-bottom: 1px solid;
@@ -73,6 +76,8 @@ header {
   font-family: cursive;
  }
 
+
+/*footer*/
  footer {
   height: 150px;
   width: 100%;
@@ -108,4 +113,9 @@ header {
 
 .top-welcome {
  font-family: cursive;
+}
+
+.form-control {
+ margin-top: 15px;
+ margin-bottom: 15px;
 }
